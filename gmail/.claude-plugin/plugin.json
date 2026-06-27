@@ -1,0 +1,11 @@
+{
+  "name": "gmail",
+  "description": "Gmail channel for Claude Code — surfaces new INBOX emails as channel notifications (source \"gmail\"). One-way inbound; no reply tool.",
+  "version": "0.1.0",
+  "keywords": [
+    "gmail",
+    "email",
+    "channel",
+    "mcp"
+  ]
+}

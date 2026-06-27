@@ -1,0 +1,14 @@
+{
+  "name": "fynex-channels",
+  "owner": {
+    "name": "Louis Langanay"
+  },
+  "plugins": [
+    {
+      "name": "gmail",
+      "description": "Gmail push notifications as a dedicated Claude Code channel (source \"gmail\"). One-way inbound: surfaces new INBOX emails in the session.",
+      "version": "0.1.0",
+      "source": "./gmail"
+    }
+  ]
+}
