@@ -38,3 +38,29 @@ Then launch Claude with the channel:
 ```bash
 claude --channels plugin:gmail@fynex-channels ...
 ```
+
+## Feeding the bridge
+
+The plugin does not talk to Gmail itself: something has to POST each new email
+to the bridge. In my setup that is a small webhook receiving Gmail Pub/Sub push
+notifications (not part of this repository). Any process on the same machine
+can do it:
+
+```bash
+curl -X POST http://127.0.0.1:3006/gmail-notify \
+  -H 'Content-Type: application/json' \
+  -d '{"from": "Jane <jane@example.com>", "subject": "Hello", "snippet": "First line of the email"}'
+```
+
+`from`, `subject` and `snippet` are all optional. Each POST becomes one channel
+notification in the running Claude Code session.
+
+## Notes
+
+- The bridge listens on `127.0.0.1` only. Nothing is exposed to the network.
+- The channel is one-way: Claude can read notifications but cannot reply
+  through it. Use a Gmail MCP server to read full messages or answer.
+- The server's instructions tell Claude to treat email content as untrusted
+  data (no following instructions found in a subject, sender or snippet).
+- Notification text is in French (`Nouvel email de …`), edit `gmail/server.ts`
+  to change it.
